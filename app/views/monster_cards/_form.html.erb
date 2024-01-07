@@ -1,0 +1,37 @@
+<%= form_with(model: monster_card) do |form| %>
+  <% if monster_card.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(monster_card.errors.count, "error") %> prohibited this monster_card from being saved:</h2>
+
+      <ul>
+        <% monster_card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :kind, style: "display: block" %>
+    <%= form.text_field :kind %>
+  </div>
+
+  <div>
+    <%= form.label :attack, style: "display: block" %>
+    <%= form.number_field :attack %>
+  </div>
+
+  <div>
+    <%= form.label :defense, style: "display: block" %>
+    <%= form.number_field :defense %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

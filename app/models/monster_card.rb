@@ -1,0 +1,2 @@
+class MonsterCard < ApplicationRecord
+end
