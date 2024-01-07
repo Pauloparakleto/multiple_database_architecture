@@ -25,34 +25,25 @@ development:
     database: multipledatabase_development
     username: postgres
     adapter: postgresql
-  queues:
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } + 5 %>
+  queues_primary:
     database: queue_development
     username: postgres
     adapter: postgresql
     migrations_paths: db/queues_migrate
-development_queues:
-  database: queues_development
-  username: postgres
-  adapter: postgresql
-  migrations_paths: db/queues_migrate
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } + 5 %>
 
 test:
   primary:
     database: multipledatabase_test
     username: postgres
     adapter: postgresql
-  queues:
+  queues_primary:
     database: queues_test
     username: postgres
     password: <%= ENV['ANIMALS_ROOT_PASSWORD'] %>
     adapter: postgresql
     migrations_paths: db/queues_migrate
-test_queues:
-  database: queues_test
-  username: postgres
-  password: <%= ENV['ANIMALS_ROOT_PASSWORD'] %>
-  adapter: postgresql
-  migrations_paths: db/queues_migrate
 
 #   production:
 #     url: <%= ENV["MY_APP_DATABASE_URL"] %>
@@ -65,7 +56,7 @@ production:
     database: multipledatabase_production
     username: multipledatabase
     password: <%= ENV["MULTIPLEDATABASE_DATABASE_PASSWORD"] %>
-  queues:
+  queues_primary:
     database: queues_production
     username: postgres
     password: <%= ENV['ANIMALS_ROOT_PASSWORD'] %>
