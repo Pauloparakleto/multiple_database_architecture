@@ -1,24 +1,11 @@
-# README
+# Multiple Database Architecture with GoodJob gem
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Good Job is a queue scheduler designed to play in a single database.
 
-Things you may want to cover:
+As the application grows, soon or later, the single database will be stressed by both insertions in the cron
+scheduler and in the main models per si.
 
-* Ruby version
+This repository is here to answer this question:
+> How to configure GoodJob to play with a secondary database while leaving the main database 
+> with the data the user needs to consult?
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
