@@ -38,10 +38,11 @@ test:
     database: multipledatabase_test
     username: postgres
     adapter: postgresql
+    password: <%= ENV['PRIMARY_PASSWORD'] %>
   queues_primary:
     database: queues_test
     username: postgres
-    password: <%= ENV['ANIMALS_ROOT_PASSWORD'] %>
+    password: <%= ENV['SECONDARY_PASSWORD'] %>
     adapter: postgresql
     migrations_paths: db/queues_migrate
 
