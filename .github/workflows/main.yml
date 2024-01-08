@@ -15,7 +15,7 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: "123456"
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: multipledatabase_test
         ports:
           - 5432:5432
@@ -25,7 +25,7 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: "123456"
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: queues_test
         ports:
           - 5433:5432
@@ -45,8 +45,10 @@ jobs:
           PGUSER: postgres
           PGPORT: 5432
           RAILS_ENV: test
-          DATABASE_URL1: postgres://postgres:123456@localhost:5432/multipledatabase_test
-          DATABASE_URL2: postgres://postgres:123456@localhost:5433/queues_test
+          PRIMARY_PASSWORD: postgres
+          SECONDARY_PASSWORD: postgres
+          DATABASE_URL1: postgres://postgres:postgres@localhost:5432/multipledatabase_test
+          DATABASE_URL2: postgres://postgres:postgres@localhost:5433/queues_test
         run: |
           gem install bundler
           bundle config path vendor/bundle
@@ -55,6 +57,8 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL1: postgres://postgres:123456@localhost:5432/multipledatabase_test
-          DATABASE_URL2: postgres://postgres:123456@localhost:5433/queues_test
+          PRIMARY_PASSWORD: postgres
+          SECONDARY_PASSWORD: postgres
+          DATABASE_URL1: postgres://postgres:postgres@localhost:5432/multipledatabase_test
+          DATABASE_URL2: postgres://postgres:postgres@localhost:5433/queues_test
         run: bundle exec rspec
