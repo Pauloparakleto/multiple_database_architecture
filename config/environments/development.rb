@@ -11,6 +11,20 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  config.active_job.queue_adapter = :good_job
+
+  config.good_job.enable_cron = true
+
+  config.good_job.cron = {
+    create_monster_card: {
+                     cron: "*/1 * * * *",
+                     class: "ExampleJob",
+                     args: [''],
+                     set: { priority: 1 },
+                     description: "Create Monster Card",
+    },
+  }
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
