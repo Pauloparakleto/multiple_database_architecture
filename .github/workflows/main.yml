@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: "123456"
-          POSTGRES_DB: primary
+          POSTGRES_DB: multipledatabase_test
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -26,7 +26,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: "123456"
-          POSTGRES_DB: good_job_queues
+          POSTGRES_DB: queues_test
         ports:
           - 5433:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -45,8 +45,8 @@ jobs:
           PGUSER: postgres
           PGPORT: 5432
           RAILS_ENV: test
-          DATABASE_URL1: postgres://postgres:123456@localhost:5432/primary
-          DATABASE_URL2: postgres://postgres:123456@localhost:5433/good_job_queues
+          DATABASE_URL1: postgres://postgres:123456@localhost:5432/multipledatabase_test
+          DATABASE_URL2: postgres://postgres:123456@localhost:5433/queues_test
         run: |
           gem install bundler
           bundle config path vendor/bundle
@@ -55,6 +55,6 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL1: postgres://postgres:123456@localhost:5432/primary
-          DATABASE_URL2: postgres://postgres:123456@localhost:5433/good_job_queues
+          DATABASE_URL1: postgres://postgres:123456@localhost:5432/multipledatabase_test
+          DATABASE_URL2: postgres://postgres:123456@localhost:5433/queues_test
         run: bundle exec rspec
