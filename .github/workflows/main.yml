@@ -53,6 +53,6 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL1: postgres://postgres:@localhost:5432/primary
-          DATABASE_URL2: postgres://postgres:@localhost:5433/good_job_queues
+          DATABASE_URL1: postgres://postgres:123456@localhost:5432/primary
+          DATABASE_URL2: postgres://postgres:123456@localhost:5433/good_job_queues
         run: bundle exec rspec
